@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
+
+    if (loggedInUser) {
+
+        console.log(loggedInUser);
+        
+    } else {
+        window.location.href = 'https://enz048.github.io/simple-ecommerce/login.html';
+    }
+});
+
+
+
 const API_URL = 'https://fakestoreapi.com/products';
 const loader = document.getElementById('loader');
 const productsContainer = document.getElementById('productsContainer');
