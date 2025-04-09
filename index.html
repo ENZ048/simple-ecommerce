@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopCart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <h1>ShopCart</h1>
+        </div>
+
+        <div class="search">
+            <input type="text" id="search-input" placeholder="Search products">
+
+        </div>
+
+        <div class="nav-btns">
+            <a href="wishlist.html"><button class="wishlist-btn">WishList ❤️️</button></a>
+            <button class="darkMode-btn">🌙</button>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h3>Filter by Category</h3>
+            <div class="category-filters">
+                <label><input type="checkbox" value="men's clothing"> Men's Clothing</label>
+                <label><input type="checkbox" value="women's clothing"> Women's Clothing</label>
+                <label><input type="checkbox" value="jewelery"> Jewelery</label>
+                <label><input type="checkbox" value="electronics"> Electronics</label>
+            </div>
+
+            <input type="number" id="min-price" placeholder="Min-Price">
+            <input type="number" id="max-price" placeholder="Max-Price">
+            <button id="applyFiltersBtn">Apply Filters</button>
+        </aside>
+
+        <div id="loader" style="text-align:center; padding:2rem; display: none;">
+            <p>Loading products...</p>
+        </div>
+
+        <!-- Products Container -->
+        <div id="productsContainer">
+            <!-- Cards will be inserted here -->
+        </div>
+
+        <div id="productModal" class="modal hidden">
+            <div class="modal-content">
+              <span id="closeModalBtn" class="close-btn">&times;</span>
+              <div id="modalContent"></div>
+            </div>
+          </div>
+
+
+    </div>
+
+
+
+    <script src="./scripts.js"></script>
+</body>
+
+</html>
