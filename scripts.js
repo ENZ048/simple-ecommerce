@@ -44,8 +44,7 @@ const renderProducts = (products) => {
       <button class="view-btn">View Details</button>
       <button class="like-btn">❤️</button>
     `;
-  
-    // Attach event listeners to buttons
+
     const viewBtn = card.querySelector('.view-btn');
     const likeBtn = card.querySelector('.like-btn');
   
@@ -73,11 +72,9 @@ const toggleLike = (id) => {
       liked.push(id);
     }
   
-    // Update the logged-in user
     loggedInUser.likedProducts = liked;
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-  
-    // Update the user in the main users list
+
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const updatedUsers = users.map(user =>
       user.email === loggedInUser.email ? { ...user, likedProducts: liked } : user
@@ -86,7 +83,6 @@ const toggleLike = (id) => {
   };
   
 
-//  Live search
 searchInput.addEventListener('input', () => {
   const value = searchInput.value.toLowerCase();
   const filtered = allProducts.filter(p =>
@@ -119,7 +115,6 @@ const modal = document.getElementById('productModal');
 const modalContent = document.getElementById('modalContent');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
-// Open modal with product details
 const openModal = (product) => {
   modalContent.innerHTML = `
     <h2>${product.title}</h2>
@@ -131,12 +126,10 @@ const openModal = (product) => {
   modal.classList.remove('hidden');
 };
 
-// Close modal
 closeModalBtn.addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
-// Close when clicking outside modal
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.classList.add('hidden');
@@ -165,6 +158,4 @@ wishlistBtn.addEventListener('click', () => {
     window.location.href = 'https://enz048.github.io/simple-ecommerce/wishlist.html';
 });
 
-
-// Initial load
 fetchProducts();

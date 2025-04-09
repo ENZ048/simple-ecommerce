@@ -178,12 +178,6 @@ aside h3 {
   background-color: rgb(68, 109, 156);
 }
 
-/* #loader{
-    width: 80%;
-    text-align: center;
-    padding: 2rem;
-    display: none;
-} */
 
 #productsContainer {
   width: 80%;
@@ -289,11 +283,3 @@ body.dark {
   .dark aside{
     background-color: #2a2a2a;
   }
-
-  
-
-/* @media (max-width: 766px) {
-    .container{
-        flex-direction: column;
-    }
-} */

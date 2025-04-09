@@ -86,7 +86,6 @@ const removeFromWishlist = (id) => {
   user.likedProducts = user.likedProducts.filter(pid => pid !== id);
   localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-  // Update users array
   const users = JSON.parse(localStorage.getItem('users')) || [];
   const updatedUsers = users.map(u =>
     u.email === user.email ? user : u
