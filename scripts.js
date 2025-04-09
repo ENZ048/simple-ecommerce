@@ -3,6 +3,12 @@ const loader = document.getElementById('loader');
 const productsContainer = document.getElementById('productsContainer');
 const searchInput = document.getElementById('search-input');
 
+const checkbox = document.getElementById('checkbox');
+
+checkbox.addEventListener('change', () => {
+    document.body.classList.toggle('dark');
+});
+
 let allProducts = [];
 
 const fetchProducts = async () => {
@@ -29,14 +35,7 @@ const renderProducts = (products) => {
 
   products.forEach(product => {
     const card = document.createElement('div');
-    card.style = `
-      width: 250px;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      border-radius: 8px;
-      background: white;
-      text-align: center;
-    `;
+    card.classList.add('card');
   
     card.innerHTML = `
       <img src="${product.image}" alt="${product.title}" style="height: 180px; width: 150px" />
@@ -60,15 +59,32 @@ const renderProducts = (products) => {
 
 
 const toggleLike = (id) => {
-  const liked = JSON.parse(localStorage.getItem('likedProducts')) || [];
-  if (liked.includes(id)) {
-    const updated = liked.filter(pid => pid !== id);
-    localStorage.setItem('likedProducts', JSON.stringify(updated));
-  } else {
-    liked.push(id);
-    localStorage.setItem('likedProducts', JSON.stringify(liked));
-  }
-};
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!loggedInUser) {
+      alert('Please log in to like products');
+      return;
+    }
+  
+    let liked = loggedInUser.likedProducts || [];
+  
+    if (liked.includes(id)) {
+      liked = liked.filter(pid => pid !== id);
+    } else {
+      liked.push(id);
+    }
+  
+    // Update the logged-in user
+    loggedInUser.likedProducts = liked;
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+  
+    // Update the user in the main users list
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const updatedUsers = users.map(user =>
+      user.email === loggedInUser.email ? { ...user, likedProducts: liked } : user
+    );
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+  };
+  
 
 //  Live search
 searchInput.addEventListener('input', () => {
@@ -140,7 +156,13 @@ logOutBtn.addEventListener('click', () => {
         }
     }
     localStorage.removeItem('loggedInUser');
-    window.location.href = 'https://enz048.github.io/Expense-Tracker/login.html';
+    window.location.href = 'https://enz048.github.io/simple-ecommerce/login.html';
+});
+
+const wishlistBtn = document.querySelector('.wishlist-btn');
+
+wishlistBtn.addEventListener('click', () => {
+    window.location.href = 'https://enz048.github.io/simple-ecommerce/wishlist.html';
 });
 
 

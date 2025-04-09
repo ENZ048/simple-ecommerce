@@ -1,6 +1,6 @@
 const saveUser = (firstName, lastName, email, password) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push({ firstName, lastName, email, password });
+    users.push({ firstName, lastName, email, password, likedProducts: [] });
     localStorage.setItem('users', JSON.stringify(users));
 };
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user) {
                 alert('login successful');
                 localStorage.setItem('loggedInUser', JSON.stringify(user));
-                // window.location.href = 'https://enz048.github.io/Expense-Tracker/';
+                window.location.href = 'https://enz048.github.io/simple-ecommerce/';
             } else {
                 alert('Invalid email or password');
             }
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('password').value = '';
             document.getElementById('confirmPassword').value = '';
 
-            // window.location.href = 'https://enz048.github.io/Expense-Tracker/login.html';
+            window.location.href = 'https://enz048.github.io/simple-ecommerce/login.html';
         });
     }
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (signUpPageBtn) {
         signUpPageBtn.addEventListener('click', () => {
             console.log('signUpPageBtn clicked');
-            // window.location.href = 'https://enz048.github.io/Expense-Tracker/register.html';
+            window.location.href = 'https://enz048.github.io/simple-ecommerce/signup.html';
         });
     }
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginPageBtn) {
         loginPageBtn.addEventListener('click', () => {
             console.log('loginPageBtn clicked');
-            // window.location.href = 'https://enz048.github.io/Expense-Tracker/login.html';
+            window.location.href = 'https://enz048.github.io/simple-ecommerce/login.html';
         });
     }
 });

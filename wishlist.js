@@ -18,7 +18,8 @@ const fetchProducts = async () => {
 };
 
 const renderWishlist = () => {
-  const liked = JSON.parse(localStorage.getItem('likedProducts')) || [];
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
+  const liked = user?.likedProducts || [];
   const likedProducts = allProducts.filter(product => liked.includes(product.id));
 
   wishlistContainer.innerHTML = '';
@@ -79,10 +80,27 @@ window.addEventListener('click', (e) => {
 });
 
 const removeFromWishlist = (id) => {
-  let liked = JSON.parse(localStorage.getItem('likedProducts')) || [];
-  liked = liked.filter(pid => pid !== id);
-  localStorage.setItem('likedProducts', JSON.stringify(liked));
+  let user = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!user) return;
+
+  user.likedProducts = user.likedProducts.filter(pid => pid !== id);
+  localStorage.setItem('loggedInUser', JSON.stringify(user));
+
+  // Update users array
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const updatedUsers = users.map(u =>
+    u.email === user.email ? user : u
+  );
+  localStorage.setItem('users', JSON.stringify(updatedUsers));
+
   renderWishlist();
 };
+
+
+const backBtn = document.querySelector('.goToHomepage');
+
+backBtn.addEventListener('click', () => {
+  window.location.href = 'https://enz048.github.io/simple-ecommerce/';
+})
 
 fetchProducts();
